@@ -9,8 +9,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0"/>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script></head>
 <link href="css/feed.css" rel="stylesheet">
+<link href="css/search.css" rel="stylesheet">
+<script src="js/search.js"></script>
 <title>Grang Feed</title>
+<script type="text/javascript">
+	var request=new XMLHttpRequest();
+	function searchFunction(){
+		request.open("Post","./search.act?hash="+encodeURIComponent(document.getElementById("hash").value),true);
+		request.onreadystatechange=searchProcess;
+		request.send(null);
+	}
+	function searchProcess(){
+		var feed=document.getElementById("ajaxFeed");
+		feed.innerHTML="";
+		if(request.readyState==4 && request.status==200){
+			var object=eval('('+request.responseText+')');
+			var result=object.result;
+			for(var i=0; i<result.length; i++){
+				var row=feed.insertRow(0);
+				for(var j=0; j<result[i].length; j++){
+					var cell=row.insertCell(j);
+					cell.innerHTML=result[i][j].value;
+				}
+			}
+		}
+	}
+	window.onload=function(){
+		searchFunction();
+	}
+	
+</script>
 </head>
 <body>
 <!-- 
@@ -62,19 +94,27 @@
 			<span class="board_user">${board.userName}</span><span class="board_category">${board.category}</span><span class="board_present">${board.present}</span>
 		</div>
 		<div class="board_photo">
-			<img src="images/${board.photoName}">
+			<a href=""><img src="/GrangT/upload/${board.photoRealName}"></a>
 		</div>
-		<div class="board_hash"><span class="board_hash">${board.hash}</span></div>
+		<div class="board_hash"><span class="board_hash">#${board.hash}</span></div>
 		<div class="board_content">
 			<p>${board.content}</p>
 		</div>
 		<br>
 		<hr>
-	</c:forEach>
+	</c:forEach>	
+	</div>
+	<div class="blank"></div>
 	<input type="button" value="더보기" class="show_more" onclick="location.href='selectAllBoard.act'">
 	<%@ include file="bottomMenu.jsp" %>
+	<div id="search">
+    <button type="button" class="close">×</button>
+    <form action="search.act" method="post">
+        <input type="search" id="hash" onkeyup="searchFunction()" placeholder="해시 검색" />
+        <button type="submit" class="btn btn-primary">검색</button>
+    </form>
 </div>
-	
+</div>	
 
 
 </body>

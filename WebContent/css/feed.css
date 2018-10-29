@@ -107,7 +107,7 @@ body{
 	height: 30px;
 }
 .feed{
-	margin-top:17%;
+	margin-top:7%;
 }
 hr{
 	background-color: rgb(218, 191, 201);
@@ -166,4 +166,7 @@ hr{
     background-color: white;
     background: linear-gradient(to right, rgb(196,68,134),rgb(239,124,125));
     color: #fff;
+}
+.blank{
+	height:80px;
 }

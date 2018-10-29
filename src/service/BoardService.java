@@ -15,12 +15,12 @@ public class BoardService {
 		boarddao=BoardDAO.getInstance();
 	}
 	
-	public int uploadBoard(String content, String photo, String category, String userId) {
+	public int uploadBoard(String content, String fileName, String fileRealName, String category, String userId) {
 		if(content!=null) {
 			BoardBean boardbean=new BoardBean();
 			boardbean.setContent(content);
-			boardbean.setPhotoName(photo);
-			boardbean.setPhotoRealName(photo);
+			boardbean.setPhotoName(fileName);
+			boardbean.setPhotoRealName(fileRealName);
 			boardbean.setUserId(userId);
 			boardbean.setCategory(category);
 			boarddao.insertBoard(boardbean);
@@ -28,6 +28,7 @@ public class BoardService {
 		}else{
 			return 0;
 		}
+		
 	}
 	
 	public void removeBoard() {

@@ -15,7 +15,7 @@
       <span class="text">Home</span>
    </div>
    <div id="icon search">
-      <a href="#" class="footer_icon"><img src="images/searchtool.png"></a><br>
+      <a href="#search" class="footer_icon"><img src="images/searchtool.png"></a><br>
       <span class="text">Search</span>
    </div>
    <div id="icon upload"> 

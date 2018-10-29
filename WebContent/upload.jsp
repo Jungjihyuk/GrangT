@@ -44,18 +44,17 @@
 	<div class="header">
 		<a href="#" class="button menu"><img src="images/menubar.png"></a>
 		<span class="title">Grang</span>
-		<div class="myfeed">
+		<!-- <div class="myfeed">
 			<button class="myboard">내 게시물</button>
 		</div>		
 		<div class="pick">
 			<button class="mypick">찜</button>
-		</div>
-		
+		</div> -->
 	</div>
 	<!-- 피드방이 5개 이상부터는 화살표를 눌러서 새로운 리스트를 볼 수 있게 -->
 
 	<div class="board_upload">
-		<form action="uploadBoard.act" method="post">
+		<form action="uploadBoard.act" enctype="multipart/form-data" method="post">
 			<div class="form">
             <ul class="tabs">
                 <li class="active" data-panel="content">게시글</li>
@@ -75,7 +74,7 @@
 				</div>
 				<div class="photo_upload">
 					<p class="title">추가할 사진을 선택해주세요.<p>
-					<input type="file" id="input_imgs" name="photo"multiple/>
+					<input type="file" id="input_imgs" name="photo" multiple/>
 				</div>
             </div><!-- 사진 업로드시 파일 크기와 관계없이 정해진 사이즈에 맞춰 보여주기 추가 -->
             <div id="hash" class="panel">
