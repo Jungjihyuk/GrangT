@@ -80,13 +80,13 @@ body{
 }
 
 figure{
-	width: 200px;
+	width: 180px;
 	height: 50px;
 	border: 1.2px solid #784950;
 	border-radius: 20px;
 	position: absolute;
-	top: 10%;
-	right: 10%;
+	top: 15%;
+	right: 12%;
 	margin-right: 50px;
 	text-align: center;
 	line-height: 50px;
@@ -307,6 +307,21 @@ section>article:nth-child(3){
 #login_form input:focus{
 	border-bottom: 1.5px dotted brown;
 }
+
+#login_form div{
+	width: 100%;
+	height: 60px;
+	font-size: 1.8em;
+	background: transparent;
+	border-bottom: 1px dotted #000;
+	font-family: 'Noto Serif KR', sans-serif;
+}
+
+#login_form div:focus{
+	border-bottom: 1.5px dotted brown;
+}
+
+
 
 /*footer*/
 #footer{

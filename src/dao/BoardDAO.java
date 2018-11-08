@@ -65,15 +65,7 @@ public class BoardDAO {
 		return boardNum;
 		
 	}
-	
-	public boolean selectAllBoard() {
-		try {
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return true;
-	}
+
 	
 	public void updateBoard() {
 		
@@ -83,20 +75,4 @@ public class BoardDAO {
 		
 	}
 	
-	/*
-	public void getBoard(int boardNum) throws SQLException {
-		getCon();
-		try {
-			
-		}catch(Exception e) {
-			String sql="select *from viw_board where boardNum=?";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1,boardNum);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				
-			}
-		}
-	}
-	*/
 }

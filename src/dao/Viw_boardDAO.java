@@ -33,11 +33,12 @@ public class Viw_boardDAO {
 		}
 	}
 	
-	public Vector<Viw_boardBean> selectAllBoard() {
+	public Vector<Viw_boardBean> selectAllBoard(String category) {
 		Vector<Viw_boardBean> list=new Vector<Viw_boardBean>();
-		String sql="select *from viw_board order by present desc";
+		String sql="select *from viw_board where category=? order by present desc";
 		try {
 			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, category);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Viw_boardBean viw_boardBean=new Viw_boardBean();

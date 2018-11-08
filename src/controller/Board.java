@@ -11,15 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+//import java.io.File;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import dao.BoardDAO;
 import model.Viw_boardBean;
 import service.BoardService;
 import service.HashService;
+import service.UserInfoService;
 import service.Viw_boardService;
-
-//import java.io.File;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.oreilly.servlet.MultipartRequest;
 
 //@WebServlet("/uploadBoard.do")
 public class Board extends HttpServlet {
@@ -28,10 +29,12 @@ public class Board extends HttpServlet {
 	private BoardService boardservice;
 	private HashService hashservice;
 	private Viw_boardService viwboardservice;
+	private UserInfoService userinfoservice;
 	public Board() {
 		boardservice=new BoardService();
 		hashservice=new HashService();
 		viwboardservice=new Viw_boardService();
+		userinfoservice=new UserInfoService();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,9 +65,7 @@ public class Board extends HttpServlet {
 			MultipartRequest multipartRequest=new MultipartRequest(request, directory, maxSize, encoding, new DefaultFileRenamePolicy());
 					
 			String fileName=multipartRequest.getOriginalFileName("photo"); 
-			String fileRealName=multipartRequest.getFilesystemName("photo");
-			System.out.println(fileName);
-			System.out.println(fileRealName);
+			String fileRealName=multipartRequest.getFilesystemName("photo");	
 			
 			HttpSession session=request.getSession();
 			//UserBean userbean=(UserBean) session.getAttribute("userbean");
@@ -76,10 +77,6 @@ public class Board extends HttpServlet {
 			String category=multipartRequest.getParameter("category");
 			String userId=(String) session.getAttribute("id");
 		
-			System.out.println(category);
-			System.out.println(hash);
-			System.out.println(content);
-			System.out.println(userId);
 			
 			//게시물 DB insert
 			int result=boardservice.uploadBoard(content, fileName,fileRealName, category, userId);
@@ -105,7 +102,12 @@ public class Board extends HttpServlet {
 			}
 		}else if(requestUri.equals(contextPath+"/selectAllBoard.act")) {
 			//게시물 보여주기
-			Vector <Viw_boardBean> list=viwboardservice.selectAllBoard();
+			//현재 로그인한 유저의 관심 카테고리 가져오기 
+			HttpSession session=request.getSession();
+			String userId=(String) session.getAttribute("id");
+			String category=userinfoservice.selectCategory(userId);
+			
+			Vector <Viw_boardBean> list=viwboardservice.selectAllBoard(category);
 			request.setAttribute("list", list);
 			RequestDispatcher dis=request.getRequestDispatcher("feed.jsp");
 			dis.forward(request, response);
@@ -116,7 +118,7 @@ public class Board extends HttpServlet {
 		}else if(requestUri.equals(contextPath+"search.act")) {
 			//해시 검색 (여기서 해도 될라나?)
 			String hash=request.getParameter("hash");
-			//response.getWriter().write(getJSON(hash));
+			response.getWriter().write(viwboardservice.searchBoard(hash));
 		}
 		
 	}

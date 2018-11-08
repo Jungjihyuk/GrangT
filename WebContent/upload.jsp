@@ -42,7 +42,7 @@
 
 <div class="wrap">
 	<div class="header">
-		<a href="#" class="button menu"><img src="images/menubar.png"></a>
+		<a href="myMenu.jsp" class="button menu"><img src="images/menubar.png"></a>
 		<span class="title">Grang</span>
 		<!-- <div class="myfeed">
 			<button class="myboard">내 게시물</button>

@@ -6,7 +6,7 @@ import dao.BoardDAO;
 import model.BoardBean;
 //import dao.HashDAO;
 //import model.HashBean;
-import model.UserBean;
+//import model.UserBean;
 
 public class BoardService {
 	private BoardDAO boarddao;

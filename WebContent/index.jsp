@@ -29,6 +29,22 @@
             });
         });
     </script>-->
+<script type="text/javascript">
+
+function checkPwd(){
+  var f1=document.forms[0];	
+  var pw1 = f1.password.value;
+  var pw2 = f1.passwordchk.value;
+  if(pw1!=pw2){
+   document.getElementById('checkPwd').style.color = "red";
+   document.getElementById('checkPwd').innerHTML = "동일한 비밀번호를 입력하세요."; 
+  }else{
+   document.getElementById('checkPwd').style.color = "black";
+   document.getElementById('checkPwd').innerHTML = "비밀번호가 일치합니다."; 
+  }
+ }
+ 
+</script>
 </head>
 <body>
     <div id="wrap">
@@ -122,9 +138,10 @@
                   <input type="text" name="userName" class="name" placeholder="Name"> <br>
                   <input type="email" name="id" class="email" placeholder="email (ID)"> <br>
                   <input type="password" name="password" class="pwd" placeholder="Password"> <br>
-                  <input type="password" name="passwordchk" class="pwdchk" placeholder="Password Check">
-              	  <input type="submit" value="시작하기">
-              </form>
+                  <input type="password" name="passwordchk" class="pwdchk" placeholder="Password Check" onkeyup="checkPwd()">
+              	  <div id="checkPwd"></div>
+              	  <input type="submit" value="시작하기" >
+                </form>
             </article>
             <article id="login">
                 <h2>로그인</h2>
@@ -132,7 +149,7 @@
                   <input type="text" name="id" class="id2" placeholder="email (ID)"> <br>
                   <input type="password" name="password" class="pwd2" placeholder="Password">
                   <input type="submit" value="Login">
-              </form>
+              	</form>
             </article>
         </section>
         <!--footer-->

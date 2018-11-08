@@ -20,7 +20,7 @@ public class UserDAO {
 		return instance;
 	}
 	
-	//커넥션풀을 이용하여 데이터 베이스에 접근 
+	
 	public UserDAO() {
 		try {
 			String dbURL="jdbc:mysql://localhost:3306/grangT?useSSL=false";
@@ -34,17 +34,16 @@ public class UserDAO {
 	}
 	//selectId 수정 해야함.
 	public int selectId(String id) {
-		String sql="select *from users where id=?";
-		String result=null;
+		String sql="select userName from users where id=?";
+		
 		try {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				rs.getString(1);
-				if(result==null) {
-					return 1;
-				}
+				return 2; // 있고
+			} else {
+				return 1; // 없고
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

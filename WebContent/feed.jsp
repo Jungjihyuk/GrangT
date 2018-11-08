@@ -9,12 +9,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0"/>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script></head>
+
+
 <link href="css/feed.css" rel="stylesheet">
 <link href="css/search.css" rel="stylesheet">
 <script src="js/search.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <title>Grang Feed</title>
 <script type="text/javascript">
 	var request=new XMLHttpRequest();
@@ -24,24 +28,17 @@
 		request.send(null);
 	}
 	function searchProcess(){
-		var feed=document.getElementById("ajaxFeed");
-		feed.innerHTML="";
-		if(request.readyState==4 && request.status==200){
-			var object=eval('('+request.responseText+')');
-			var result=object.result;
-			for(var i=0; i<result.length; i++){
-				var row=feed.insertRow(0);
-				for(var j=0; j<result[i].length; j++){
-					var cell=row.insertCell(j);
-					cell.innerHTML=result[i][j].value;
-				}
-			}
-		}
+		
 	}
 	window.onload=function(){
 		searchFunction();
 	}
-	
+
+	$(function() {
+	    $('.navbar-toggle').click(function(){
+	      $(this).toggleClass('active');
+	    }); 
+	});
 </script>
 </head>
 <body>
@@ -51,11 +48,13 @@
 </form>
 
  -->
-<div class="wrap">
+<div id="wrapper">
+
 	<div class="header">
-		<a href="#" class="button menu"><img src="images/menubar.png"></a>
-		<h1 class="title">Grang</h1>
+		<a href="myMenu.jsp" class="button menu"><img src="images/menubar.png"></a>
+		<span class="title">Grang</span>
 	</div>
+	
 	<!-- 피드방이 5개 이상부터는 화살표를 눌러서 새로운 리스트를 볼 수 있게 -->
 	<!-- 
 	<div class="feed_list">
@@ -69,7 +68,6 @@
 	
 	<!-- 뉴스피드 보여주기  -->
 	
-	<div class="feed">
 	<!-- 
 	
 	<div class="board_header">
@@ -89,6 +87,7 @@
 		</div>
 	</div>
 	 -->
+<div class="feed">
 	<c:forEach var="board" items="${list}">
 		<div class="board_header">
 			<span class="board_user">${board.userName}</span><span class="board_category">${board.category}</span><span class="board_present">${board.present}</span>
@@ -103,17 +102,21 @@
 		<br>
 		<hr>
 	</c:forEach>	
-	</div>
+	
+	
 	<div class="blank"></div>
+</div>
+	
 	<input type="button" value="더보기" class="show_more" onclick="location.href='selectAllBoard.act'">
+
 	<%@ include file="bottomMenu.jsp" %>
 	<div id="search">
-    <button type="button" class="close">×</button>
-    <form action="search.act" method="post">
-        <input type="search" id="hash" onkeyup="searchFunction()" placeholder="해시 검색" />
-        <button type="submit" class="btn btn-primary">검색</button>
-    </form>
-</div>
+    	<button type="button" class="close">×</button>
+    	<form action="search.act" method="post">
+       	 	<input type="search" id="hash" onkeyup="searchFunction()" placeholder="해시 검색" />
+       		<button type="submit" class="btn btn-primary" onclick="searchFunction();" >검색</button>
+    	</form>
+	</div>
 </div>	
 
 
