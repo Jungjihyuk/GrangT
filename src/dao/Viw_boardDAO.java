@@ -33,7 +33,7 @@ public class Viw_boardDAO {
 		}
 	}
 	
-	public Vector<Viw_boardBean> selectAllBoard(String category) {
+	public Vector<Viw_boardBean> selectAllBoard(String category) {//category가 배열로 넘어 온다면? 
 		Vector<Viw_boardBean> list=new Vector<Viw_boardBean>();
 		String sql="select *from viw_board where category=? order by present desc";
 		try {
@@ -61,7 +61,7 @@ public class Viw_boardDAO {
 	
 	
 	public Vector<Viw_boardBean> searchHashBoard(String hash) {
-		Vector<Viw_boardBean> list=new Vector<Viw_boardBean>();
+		Vector<Viw_boardBean> Slist=new Vector<Viw_boardBean>();
 		String sql="select *from viw_board where hash like ? order by present desc";
 		try {
 			pstmt=con.prepareStatement(sql);
@@ -78,12 +78,12 @@ public class Viw_boardDAO {
 				viw_boardBean.setHash(rs.getString(7));
 				viw_boardBean.setUserId(rs.getString(8));
 				viw_boardBean.setPresent(rs.getDate(9));
-				list.add(viw_boardBean);
+				Slist.add(viw_boardBean);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return Slist;
 	}
 	
 }

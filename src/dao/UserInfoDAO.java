@@ -51,7 +51,7 @@ private static UserInfoDAO instance;
 		}
 	}
 	
-	public String selectCategory(String userid) {
+	public String selectCategory(String userid) {//해당 아이디가 갖고 있는 카테고리 모두 반환
 		String sql="select category from userinfo where userId=?";
 		String category=null;
 		try {
@@ -65,5 +65,24 @@ private static UserInfoDAO instance;
 			e.printStackTrace();
 		}
 		return category;
+	}
+	
+	//아직 미완성
+	public void updateCategory(String interest, String userId) {
+		String sql="update userinfo set category=? where userid=?";
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, interest);
+			pstmt.setString(2, userId);
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt!=null&&!pstmt.isClosed())pstmt.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

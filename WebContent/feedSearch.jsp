@@ -13,6 +13,7 @@
 
 <link href="css/feed.css" rel="stylesheet">
 <link href="css/search.css" rel="stylesheet">
+<script src="js/search.js"></script>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -20,13 +21,8 @@
 
 <title>Grang Feed</title>
 <script type="text/javascript">
-//var request=new XMLHttpRequest();
 function searchFunction(){
 	var hash=document.getElementById("hash").value;
-	//request.open("post","GrangT/searchHash.act?hash="+encodeURIComponent(document.getElementById("hash").value),true);
-	//request.open("post","/searchHash.act",true);
-	//request.send("hash"+encodeURIComponent(hash));
-	//request.send(null);
 	window.open("./searchHash.act?hash="+encodeURIComponent(document.getElementById("hash").value),"_self");
 }
 $(function () {
@@ -56,23 +52,14 @@ $(function() {
 	}); 
 });
 </script>
-<!-- 
-var request=new XMLHttpRequest();
-	function searchFunction(){
-		request.open("Post","./search.act?hash="+encodeURIComponent(document.getElementById("hash").value),true);
-		//request.onreadystatechange=searchProcess;
-		request.send(null);
-	}
-	function searchProcess(){
-		
-	}
-	window.onload=function(){
-		searchFunction();
-	}
- -->
 </head>
 <body>
+<!-- 
+<form action="logOut" method="post">
+	<input type="submit" value="로그아웃">
+</form>
 
+ -->
 <div id="wrapper">
 
 	<div class="header">
@@ -84,7 +71,7 @@ var request=new XMLHttpRequest();
 	
 	
 <div class="feed">
-	<c:forEach var="board" items="${list}">
+	<c:forEach var="board" items="${Slist}">
 		<div class="board_header">
 			<span class="board_user">${board.userName}</span><span class="board_category">${board.category}</span><span class="board_present">${board.present}</span>
 		</div>
@@ -108,15 +95,10 @@ var request=new XMLHttpRequest();
 	<%@ include file="bottomMenu.jsp" %>
 	<div id="search">
     	<button type="button" class="close">×</button>
-    	
-       	<input type="search" id="hash" placeholder="해시 검색" />
-       	<button type="submit" class="btn btn-primary" onclick="searchFunction();" >검색</button>
-    	<!-- 
-    	<form action="searchHash.act" method="post">
-       	 	<input type="search" id="hash" placeholder="해시 검색" />
+    	<form action="search.act" method="post">
+       	 	<input type="search" id="hash" onkeyup="searchFunction()" placeholder="해시 검색" />
        		<button type="submit" class="btn btn-primary" onclick="searchFunction();" >검색</button>
     	</form>
-    	 -->
 	</div>
 </div>	
 

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.Vector;
 
 import javax.servlet.RequestDispatcher;
@@ -115,10 +116,13 @@ public class Board extends HttpServlet {
 			//게시물 수정
 		}else if(requestUri.equals(contextPath+"")) {
 			//게시물 삭제 
-		}else if(requestUri.equals(contextPath+"search.act")) {
+		}else if(requestUri.equals(contextPath+"/searchHash.act")) {
 			//해시 검색 (여기서 해도 될라나?)
-			String hash=request.getParameter("hash");
-			response.getWriter().write(viwboardservice.searchBoard(hash));
+			String hash=URLDecoder.decode(request.getParameter("hash"),"UTF-8");
+			Vector <Viw_boardBean> Slist=viwboardservice.searchBoard(hash);
+			request.setAttribute("Slist", Slist);
+			RequestDispatcher dis=request.getRequestDispatcher("feedSearch.jsp");
+			dis.forward(request, response);
 		}
 		
 	}

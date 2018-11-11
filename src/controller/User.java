@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.UserInfoBean;
 import service.UserInfoService;
 import service.UserService;
 
@@ -82,6 +84,13 @@ public class User extends HttpServlet {
 			//가입한 유저 session 가져오기 
 			//관심사 리스트로 받아오기 
 			//관심사 userinfo table에 저장
+			
+			//미완성
+			UserInfoBean userinfobean=new UserInfoBean();
+			String interest=URLDecoder.decode(request.getParameter("check"), "UTF-8");
+			String user=userinfobean.getUserId();
+			
+			userinfoservice.updateCategory(interest, user);
 			
 			RequestDispatcher dis=request.getRequestDispatcher("feed.jsp");
 			dis.forward(request, response);

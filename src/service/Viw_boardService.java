@@ -27,21 +27,9 @@ public class Viw_boardService {
 		
 	}
 	
-	public String searchBoard(String hash) {
-		if(hash==null) hash="";
-		StringBuffer result=new StringBuffer("");
-		result.append("{\"result\":[");
-		Vector<Viw_boardBean> list=viw_boarddao.searchHashBoard(hash);
-		for(int i=0; i<list.size(); i++) {
-			result.append("[{\"value\":\""+list.get(i).getUserName()+"\"},");
-			result.append("{\"value\":\""+list.get(i).getCategory()+"\"},");
-			result.append("{\"value\":\""+list.get(i).getPresent()+"\"},");
-			result.append("{\"value\":\""+list.get(i).getPhotoRealName()+"\"},");
-			result.append("{\"value\":\""+list.get(i).getContent()+"\"},");
-			result.append("{\"value\":\""+list.get(i).getHash()+"\"}],");
-		}
-		result.append("]}");
-		return result.toString();
+	public Vector<Viw_boardBean> searchBoard(String hash) {
+		Vector<Viw_boardBean> Slist=viw_boarddao.searchHashBoard(hash);
+		return Slist;
 	}
 	
 }

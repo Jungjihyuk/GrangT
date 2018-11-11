@@ -24,4 +24,8 @@ public class UserInfoService {
 		category=userinfodao.selectCategory(userId);
 		return category;
 	}
+	public void updateCategory(String interest, String userId) {
+		userinfodao.updateCategory(interest, userId);
+	}
+	
 }

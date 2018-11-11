@@ -139,12 +139,25 @@ hr{
 }
 .board_category{
 	margin-left:15%;
+	background-color: powderblue;
+	border-radius:0.35rem;
+	padding:0.3rem;
+	color:white;
+	font-weight:bold;
 }
 .board_user{
 	margin-left:5%;
+	background-color: powderblue;
+	border-radius:0.35rem;
+	padding:0.3rem;
+	color:white;
 }
 .board_present{
-	margin-left:25%;
+	margin-left:21%;
+	background-color: powderblue;
+	border-radius:0.35rem;
+	padding:0.3rem;
+	color:white;
 }
 .board_photo{
 	width:100%;

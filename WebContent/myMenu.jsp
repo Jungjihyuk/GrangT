@@ -40,6 +40,9 @@ $(function() {
 				<a class="nav-link" href="#">구독 목록</a>
 				</li>
 				<li class="nav-item">
+				<a class="nav-link" href="">관심사 변경</a>
+				</li>
+				<li class="nav-item">
 				<a class="nav-link" href="logout.do">로그아웃</a>
 				</li>
 			</ul>
